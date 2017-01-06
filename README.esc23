@@ -1,0 +1,5 @@
+- setup script does 99% percent of job
+- this ESC instance is more for NSO/ESC tests (not for UI to do ESC deployment)
+- change UI password (https)
+- add 'esc23-demo' tenant => this way you also check integration between ESC and VIM
+

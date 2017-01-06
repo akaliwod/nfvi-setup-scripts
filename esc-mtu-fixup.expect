@@ -1,0 +1,21 @@
+#!/usr/bin/expect -f
+
+set host [lindex $argv 0]
+set user [lindex $argv 1]
+
+spawn ssh $user@$host 
+
+set prompt {\$ $}
+expect -re $prompt
+send "sudo ifconfig eth0 mtu 1400\r"
+expect "*password for admin:"
+send "cisco\r"
+expect -re $prompt
+send "sudo chmod a+w /opt/cisco/esc/esc-scripts\r"
+send "sudo mkdir -p /opt/cisco/esc/day0\r"
+send "sudo chmod a+w /opt/cisco/esc/day0\r"
+send "sudo mkdir -p /opt/cisco/esc/deployments\r"
+send "sudo chmod a+w /opt/cisco/esc/deployments\r"
+send "sudo chmod -R a+w /opt/cisco/esc/esc-dynamic-mapping/\r"
+send "exit\r"
+expect eof

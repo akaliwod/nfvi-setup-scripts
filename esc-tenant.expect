@@ -1,0 +1,16 @@
+#!/usr/bin/expect -f
+
+set host [lindex $argv 0]
+set user [lindex $argv 1]
+
+spawn ssh $user@$host 
+
+set prompt {\$ $}
+expect -re $prompt
+send "cd /opt/cisco/esc/esc-confd/esc-cli\r"
+send "sudo ./esc_nc_cli create-tenant esc-demo\r"
+expect "*password for admin:"
+send "cisco\r"
+expect -re $prompt
+send "exit\r"
+expect eof
